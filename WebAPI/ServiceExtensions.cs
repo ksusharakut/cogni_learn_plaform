@@ -83,6 +83,19 @@ namespace WebAPI
                     };
                 });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Authenticated", policy =>
+                    policy.RequireAuthenticatedUser());
+
+                options.AddPolicy("AdminOnly", policy =>
+                    policy.RequireRole("admin"));
+
+                options.AddPolicy("UserOnly", policy =>
+                    policy.RequireRole("user"));
+            });
+
         }
+
     }
 }

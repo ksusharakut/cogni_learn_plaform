@@ -5,6 +5,7 @@ using Application.Use_Cases.Auth.LogOut;
 using Application.Use_Cases.Auth.RefreshToken;
 using Application.Use_Cases.Auth.Register;
 using Application.Use_Cases.Auth.SetNewPassword;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
@@ -52,6 +53,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("refresh-token")]
+        [Authorize(Policy = "Authenticated")]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request, CancellationToken cancellationToken)
         {
             var result = await _refreshTokenUseCase.ExecuteAsync(request, cancellationToken);
@@ -59,6 +61,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("logout")]
+        [Authorize(Policy = "Authenticated")]
         public async Task<IActionResult> LogOut([FromBody] RefreshTokenRequest request, CancellationToken cancellationToken)
         {
             await _logOutUseCase.ExecuteAsync(request, cancellationToken);

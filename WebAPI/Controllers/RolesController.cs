@@ -1,5 +1,6 @@
 ﻿using Application.Use_Cases.Role.CreateRole;
 using Application.Use_Cases.Role.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> CreateRole([FromBody] RoleDTO roleDTO, CancellationToken cancellationToken)
         {
             await _createRoleUseCase.ExecuteAsync(roleDTO, cancellationToken);
