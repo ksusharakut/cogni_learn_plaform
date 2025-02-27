@@ -11,8 +11,46 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Common\" />
-    <Folder Include="Use Cases\" />
+    <Folder Include="Use Cases\Chapter\CreateChapter\" />
+    <Folder Include="Use Cases\Chapter\DeleteChapter\" />
+    <Folder Include="Use Cases\Chapter\GetChaptersByCourse\" />
+    <Folder Include="Use Cases\Chapter\ReorderChapters\" />
+    <Folder Include="Use Cases\Chapter\UpdateChapter\" />
+    <Folder Include="Use Cases\Course\Manage Courses\CreateCourse\" />
+    <Folder Include="Use Cases\Course\Manage Courses\DeleteCourse\" />
+    <Folder Include="Use Cases\Course\GetAllCourses\" />
+    <Folder Include="Use Cases\Course\GetCourse\" />
+    <Folder Include="Use Cases\Course\GetCourseWithDetails\" />
+    <Folder Include="Use Cases\Course\GetMyCourses\" />
+    <Folder Include="Use Cases\Course\EnrollInCourse\" />
+    <Folder Include="Use Cases\Course\Manage Courses\" />
+    <Folder Include="Use Cases\Course\Manage Courses\UnpublishCourse\" />
+    <Folder Include="Use Cases\Course\Manage Courses\PublishCourse\" />
+    <Folder Include="Use Cases\Course\Manage Courses\UpdateCourse\" />
+    <Folder Include="Use Cases\Course\CompleteCourse\" />
+    <Folder Include="Use Cases\Course\GetUserProgress\" />
+    <Folder Include="Use Cases\Rating\AddRating\" />
+    <Folder Include="Use Cases\Rating\DeleteRating\" />
+    <Folder Include="Use Cases\Rating\GetCourseRatings\" />
+    <Folder Include="Use Cases\Rating\GetUserRatingForCourse\" />
+    <Folder Include="Use Cases\Rating\GetAverageCourseRating\" />
+    <Folder Include="Use Cases\Rating\UpdateRating\" />
+    <Folder Include="Use Cases\Role\AssignRole\" />
+    <Folder Include="Use Cases\Role\ChangeRole\" />
+    <Folder Include="Use Cases\Role\GetRoles\" />
+    <Folder Include="Use Cases\Role\CheckAccess\" />
+    <Folder Include="Use Cases\Role\GetUserRoles\" />
+    <Folder Include="Use Cases\Role\RemoveRole\" />
+    <Folder Include="Use Cases\User\GetUserProfile\" />
+    <Folder Include="Use Cases\User\DeleteUser\" />
+    <Folder Include="Use Cases\User\GetAllUsers\" />
+    <Folder Include="Use Cases\User\ChangePassword\" />
+    <Folder Include="Use Cases\User\UpdateUserProfile\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
   </ItemGroup>
 
 </Project>

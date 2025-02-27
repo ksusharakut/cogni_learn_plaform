@@ -10,7 +10,6 @@ namespace Domain.Entities
         public DateOnly DateBirth { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
-        public int RoleId { get; set; }
         public DateTimeOffset UpdatedAt { get; set; } = DateTimeOffset.UtcNow;
 
         public virtual ICollection<Role> Roles { get; set; }

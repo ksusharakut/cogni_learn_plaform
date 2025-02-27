@@ -1,6 +1,5 @@
-using Infrastructure.Persistance.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Application.Use_Cases.Role.DTOs;
+using FluentValidation;
 using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +12,10 @@ builder.Services.AddDatabase(configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddMemoryCache();
+builder.Services.AddApplicationServices();
+builder.Services.AddRepositories();
+builder.Services.AddAutoMapperProfiles();
 var app = builder.Build();
 
 app.UseSwagger();
