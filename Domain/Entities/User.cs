@@ -1,4 +1,5 @@
-﻿using System.Transactions;
+﻿using System.Text.Json.Serialization;
+using System.Transactions;
 
 namespace Domain.Entities
 {
@@ -12,6 +13,7 @@ namespace Domain.Entities
         public string PasswordHash { get; set; }
         public DateTimeOffset UpdatedAt { get; set; } = DateTimeOffset.UtcNow;
 
+        [JsonIgnore]
         public virtual ICollection<Role> Roles { get; set; }
         public ICollection<UserCourse> UserCourses { get; set; }
         public ICollection<Rating> Ratings { get; set; }

@@ -21,11 +21,45 @@ using Application.Use_Cases.Auth.RefreshToken;
 using Application.Use_Cases.Auth.LogOut;
 using Application.Use_Cases.Auth.ForgotPassword;
 using Application.Use_Cases.Auth.SetNewPassword;
+using Application.Use_Cases.Role.GetRoles;
+using Application.Use_Cases.Role.GetUserRoles;
+using Application.Use_Cases.Role.AssignRole;
+using Application.Use_Cases.Role.RemoveRole;
+using Application.Use_Cases.Role.ChangeRole;
 
 namespace WebAPI
 {
     public static class ServiceExtensions
     {
+        public static void AddSwaggerConfiguration(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+                    Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey
+                });
+
+                c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+                {
+                    {
+                        new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                        {
+                            Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                            {
+                                Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] { }
+                    }
+                });
+            });
+        }
+
         public static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -58,6 +92,11 @@ namespace WebAPI
             services.AddScoped<IEmailService, MailpitEmailService>();
             services.AddScoped<IPasswordResetTokenGenerator, PasswordResetTokenGenerator>();
             services.AddScoped<ISetNewPasswordUseCase, SetNewPasswordUseCase>();
+            services.AddScoped<IGetRolesUseCase, GetRolesUseCase>();
+            services.AddScoped<IGetUserRolesUseCase, GetUserRolesUseCase>();
+            services.AddScoped<IAssignRoleUseCase,AssignRoleUseCase>();
+            services.AddScoped<IRemoveRoleUseCase, RemoveRoleUseCase>();
+            services.AddScoped<IUpdateRoleUseCase, UpdateRoleUseCase>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)

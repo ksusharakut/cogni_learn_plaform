@@ -12,16 +12,21 @@ builder.Services.AddDatabase(configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerConfiguration();
 builder.Services.AddMemoryCache();
 builder.Services.AddApplicationServices();
 builder.Services.AddRepositories();
 builder.Services.AddAutoMapperProfiles();
+builder.Services.AddJwtAuthentication(builder.Configuration);
+
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

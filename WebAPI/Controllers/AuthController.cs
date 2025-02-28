@@ -5,6 +5,7 @@ using Application.Use_Cases.Auth.LogOut;
 using Application.Use_Cases.Auth.RefreshToken;
 using Application.Use_Cases.Auth.Register;
 using Application.Use_Cases.Auth.SetNewPassword;
+using Application.Use_Cases.Role.RemoveRole;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

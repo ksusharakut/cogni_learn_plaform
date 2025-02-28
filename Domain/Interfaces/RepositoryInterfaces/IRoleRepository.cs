@@ -6,5 +6,8 @@ namespace Domain.Interfaces.RepositoryInterfaces
     {
         Task AddAsync(Role role, CancellationToken cancellationToken);
         Task<Role?> GetByNameAsync(string name, CancellationToken cancellationToken);
+        Task<IEnumerable<Role>> GetAllAsync(CancellationToken cancellationToken);
+        Task<Role> GetByIdAsync(int id, CancellationToken cancellationToken);
+        void Update(Role role);
     }
 }

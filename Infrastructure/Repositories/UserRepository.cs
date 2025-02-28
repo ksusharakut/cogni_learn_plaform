@@ -25,6 +25,11 @@ namespace Infrastructure.Repositories
             return await _context.Users.Include(u => u.Roles).FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
         }
 
+        public async Task<User?> GetByIdAsync(int id, CancellationToken cancellationToken)
+        {
+            return await _context.Users.Include(u => u.Roles).FirstOrDefaultAsync(u => u.UserId == id, cancellationToken);
+        }
+
         public void Update(User user)
         {
             _context.Users.Update(user);

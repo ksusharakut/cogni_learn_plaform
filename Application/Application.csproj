@@ -35,12 +35,6 @@
     <Folder Include="Use Cases\Rating\GetUserRatingForCourse\" />
     <Folder Include="Use Cases\Rating\GetAverageCourseRating\" />
     <Folder Include="Use Cases\Rating\UpdateRating\" />
-    <Folder Include="Use Cases\Role\AssignRole\" />
-    <Folder Include="Use Cases\Role\ChangeRole\" />
-    <Folder Include="Use Cases\Role\GetRoles\" />
-    <Folder Include="Use Cases\Role\CheckAccess\" />
-    <Folder Include="Use Cases\Role\GetUserRoles\" />
-    <Folder Include="Use Cases\Role\RemoveRole\" />
     <Folder Include="Use Cases\User\GetUserProfile\" />
     <Folder Include="Use Cases\User\DeleteUser\" />
     <Folder Include="Use Cases\User\GetAllUsers\" />
