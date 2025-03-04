@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
             return Ok("Роль успешно создана.");
         }
 
-        [HttpGet("get-all-roles")]
+        [HttpGet("all")]
         [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> GetAllRoles(CancellationToken cancellationToken)
         {

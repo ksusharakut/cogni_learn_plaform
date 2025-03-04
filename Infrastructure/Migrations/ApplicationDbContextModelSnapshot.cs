@@ -76,9 +76,6 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
-                    b.Property<int>("CourseId")
-                        .HasColumnType("integer");
-
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");

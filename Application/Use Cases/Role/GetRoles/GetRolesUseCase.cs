@@ -6,12 +6,10 @@ namespace Application.Use_Cases.Role.GetRoles
     public class GetRolesUseCase : IGetRolesUseCase
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
-        public GetRolesUseCase(IUnitOfWork unitOfWork, IMapper mapper)
+        public GetRolesUseCase(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
         public async Task<IEnumerable<Domain.Entities.Role>> ExecuteAsync(CancellationToken cancellationToken)

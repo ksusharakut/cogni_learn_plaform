@@ -30,9 +30,19 @@ namespace Infrastructure.Repositories
             return await _context.Users.Include(u => u.Roles).FirstOrDefaultAsync(u => u.UserId == id, cancellationToken);
         }
 
+        public async Task<IEnumerable<User>> GetAllWithRolesAsync(CancellationToken cancellationToken)
+        {
+            return await _context.Users.Include(u => u.Roles).ToListAsync(cancellationToken);
+        }
+
         public void Update(User user)
         {
             _context.Users.Update(user);
+        }
+
+        public void Delete(User user)
+        {
+            _context.Users.Remove(user);
         }
     }
 }
