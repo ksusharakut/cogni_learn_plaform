@@ -2,7 +2,7 @@
 {
     public enum LessonType
     {
-        Educational,
-        Test
+        Educational = 1,
+        Test = 2
     }
 }

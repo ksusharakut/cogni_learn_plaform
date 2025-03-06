@@ -40,12 +40,6 @@ namespace Application.Use_Cases.Lesson.CreateLesson
                 throw new AuthenticationFailedException("Невозможно идентифицировать текущего пользователя.");
             }
 
-            var user = await _unitOfWork.UserRepository.GetByIdAsync(userId, cancellationToken);
-            if (user == null || !user.Roles.Any(r => r.RoleName == "Author"))
-            {
-                throw new AuthorizationException("Пользователь не имеет роль 'Author'.");
-            }
-
             var chapter = await _unitOfWork.ChapterRepository.GetByIdWithCourseAsync(chapterId, cancellationToken);
             if (chapter == null)
             {

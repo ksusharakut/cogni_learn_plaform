@@ -21,7 +21,7 @@ namespace Infrastructure.Persistance.Data
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<AnswerOption> AnswerOptions { get; set; }
-
+        public DbSet<UserProgress> UserProgress { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

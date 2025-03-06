@@ -9,5 +9,6 @@ namespace Domain.Interfaces.RepositoryInterfaces
         void Update(AnswerOption answerOption);
         void Delete(AnswerOption answerOption);
         Task<List<AnswerOption>> GetByQuestionIdAsync(int questionId, CancellationToken cancellationToken);
+        Task<AnswerOption> GetByIdAsync(int id, CancellationToken cancellationToken);
     }
 }

@@ -15,7 +15,7 @@ namespace Domain.Interfaces
         ILessonRepository LessonRepository { get; }
         IQuestionRepository QuestionRepository { get; }
         IAnswerOptionRepository AnswerOptionRepository { get; }
-
+        IUserProgressRepository UserProgressRepository { get; }
         Task SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

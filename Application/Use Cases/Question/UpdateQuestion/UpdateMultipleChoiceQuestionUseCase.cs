@@ -1,23 +1,25 @@
 ﻿using Application.Exceptions;
 using Application.Use_Cases.Question.DTOs;
 using AutoMapper;
+using Domain.Enums;
 using Domain.Interfaces;
 using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
 namespace Application.Use_Cases.Question.UpdateQuestion
 {
-    public class UpdateQuestionUseCase : IUpdateQuestionUseCase
+    public class UpdateMultipleChoiceQuestionUseCase : IUpdateMultipleChoiceQuestionUseCase
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IValidator<CreateQuestionDTO> _validator;
+        private readonly IValidator<CreateMultipleChoiceQuestionDTO> _validator;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
 
-        public UpdateQuestionUseCase(
+        public UpdateMultipleChoiceQuestionUseCase(
             IUnitOfWork unitOfWork,
-            IValidator<CreateQuestionDTO> validator,
+            IValidator<CreateMultipleChoiceQuestionDTO> validator,
             IHttpContextAccessor httpContextAccessor,
             IMapper mapper)
         {
@@ -27,12 +29,12 @@ namespace Application.Use_Cases.Question.UpdateQuestion
             _mapper = mapper;
         }
 
-        public async Task ExecuteAsync(int questionId, CreateQuestionDTO request, CancellationToken cancellationToken)
+        public async Task ExecuteAsync(int questionId, CreateMultipleChoiceQuestionDTO request, CancellationToken cancellationToken)
         {
             var validationResult = await _validator.ValidateAsync(request, cancellationToken);
             if (!validationResult.IsValid)
             {
-                throw new ValidationException(validationResult.Errors);
+                throw new FluentValidation.ValidationException(validationResult.Errors);
             }
 
             var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -58,10 +60,40 @@ namespace Application.Use_Cases.Question.UpdateQuestion
                 throw new AuthorizationException("Вы можете обновлять вопросы только в своих курсах.");
             }
 
+            if (question.QuestionType != QuestionType.MultipleChoice)
+            {
+                throw new FluentValidation.ValidationException(new[]
+                {
+                    new ValidationFailure("QuestionType", "Этот use case предназначен только для вопросов с множественным выбором.")
+                });
+            }
+
+            if (request.AnswerOptions == null || !request.AnswerOptions.Any())
+            {
+                throw new FluentValidation.ValidationException(new[]
+                {
+                    new ValidationFailure("AnswerOptions", "Для вопросов с множественным выбором необходимо указать варианты ответа.")
+                });
+            }
+            if (!request.AnswerOptions.Any(a => a.IsCorrect))
+            {
+                throw new FluentValidation.ValidationException(new[]
+                {
+                    new ValidationFailure("AnswerOptions", "Должен быть хотя бы один правильный вариант ответа.")
+                });
+            }
+
             _mapper.Map(request, question);
+            question.AnswerOptions = _mapper.Map<List<Domain.Entities.AnswerOption>>(request.AnswerOptions);
+            question.CorrectAnswer = null; 
 
             _unitOfWork.QuestionRepository.Update(question);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            foreach (var option in question.AnswerOptions)
+            {
+                option.QuestionId = questionId;
+            }
         }
     }
 }

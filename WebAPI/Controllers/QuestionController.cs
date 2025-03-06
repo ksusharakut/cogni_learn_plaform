@@ -15,35 +15,65 @@ namespace WebAPI.Controllers
     [ApiController]
     public class QuestionController : ControllerBase
     {
-        private readonly ICreateQuestionUseCase _createQuestionUseCase;
+        private readonly ICreateMultipleChoiceQuestionUseCase _createMultipleChoiceQuestionUseCase;
+        private readonly ICreateOpenEndedQuestionUseCase _createOpenEndedQuestionUseCase;
         private readonly IGetQuestionUseCase _getQuestionUseCase;
-        private readonly IUpdateQuestionUseCase _updateQuestionUseCase;
+        private readonly IUpdateMultipleChoiceQuestionUseCase _updateMultipleChoiceQuestionUseCase;
+        private readonly IUpdateOpenEndedQuestionUseCase _updateOpenEndedQuestionUseCase;
         private readonly IDeleteQuestionUseCase _deleteQuestionUseCase;
         private readonly IReorderQuestionsUseCase _reorderQuestionsUseCase;
         private readonly IGetQuestionsForLessonUseCase _getQuestionsForLessonUseCase;
 
         public QuestionController(
-            ICreateQuestionUseCase createQuestionUseCase,
+            ICreateMultipleChoiceQuestionUseCase createMultipleChoiceQuestionUseCase,
+            ICreateOpenEndedQuestionUseCase createOpenEndedQuestionUseCase,
             IGetQuestionUseCase getQuestionUseCase,
-            IUpdateQuestionUseCase updateQuestionUseCase,
+            IUpdateMultipleChoiceQuestionUseCase updateMultipleChoiceQuestionUseCase,
+            IUpdateOpenEndedQuestionUseCase updateOpenEndedQuestionUseCase,
             IDeleteQuestionUseCase deleteQuestionUseCase,
             IReorderQuestionsUseCase reorderQuestionsUseCase,
             IGetQuestionsForLessonUseCase getQuestionsForLessonUseCase)
         {
-            _createQuestionUseCase = createQuestionUseCase;
+            _createMultipleChoiceQuestionUseCase = createMultipleChoiceQuestionUseCase;
+            _createOpenEndedQuestionUseCase = createOpenEndedQuestionUseCase;
             _getQuestionUseCase = getQuestionUseCase;
-            _updateQuestionUseCase = updateQuestionUseCase;
+            _updateMultipleChoiceQuestionUseCase = updateMultipleChoiceQuestionUseCase;
+            _updateOpenEndedQuestionUseCase = updateOpenEndedQuestionUseCase;
             _deleteQuestionUseCase = deleteQuestionUseCase;
             _reorderQuestionsUseCase = reorderQuestionsUseCase;
             _getQuestionsForLessonUseCase = getQuestionsForLessonUseCase;
         }
 
-        [HttpPost("lesson/{lessonId}")]
+        [HttpPost("lesson/{lessonId}/multiple-choice")]
         [Authorize(Policy = "AuthorOnly")]
-        public async Task<IActionResult> CreateQuestion(int lessonId, [FromBody] CreateQuestionDTO request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateMultipleChoiceQuestion(int lessonId, [FromBody] CreateMultipleChoiceQuestionDTO request, CancellationToken cancellationToken)
         {
-            var questionId = await _createQuestionUseCase.ExecuteAsync(lessonId, request, cancellationToken);
-            return Ok(new { QuestionId = questionId, Message = "Вопрос успешно создан!" });
+            var questionId = await _createMultipleChoiceQuestionUseCase.ExecuteAsync(lessonId, request, cancellationToken);
+            return Ok("Вопрос с множественным выбором успешно создан!" );
+        }
+
+        [HttpPost("lesson/{lessonId}/open-ended")]
+        [Authorize(Policy = "AuthorOnly")]
+        public async Task<IActionResult> CreateOpenEndedQuestion(int lessonId, [FromBody] CreateOpenEndedQuestionDTO request, CancellationToken cancellationToken)
+        {
+            var questionId = await _createOpenEndedQuestionUseCase.ExecuteAsync(lessonId, request, cancellationToken);
+            return Ok("Открытый вопрос успешно создан!");
+        }
+
+        [HttpPut("{questionId}/multiple-choice")]
+        [Authorize(Policy = "AuthorOnly")]
+        public async Task<IActionResult> UpdateMultipleChoiceQuestion(int questionId, [FromBody] CreateMultipleChoiceQuestionDTO request, CancellationToken cancellationToken)
+        {
+            await _updateMultipleChoiceQuestionUseCase.ExecuteAsync(questionId, request, cancellationToken);
+            return Ok(new { Message = "Вопрос с множественным выбором успешно обновлён!" });
+        }
+
+        [HttpPut("{questionId}/open-ended")]
+        [Authorize(Policy = "AuthorOnly")]
+        public async Task<IActionResult> UpdateOpenEndedQuestion(int questionId, [FromBody] CreateOpenEndedQuestionDTO request, CancellationToken cancellationToken)
+        {
+            await _updateOpenEndedQuestionUseCase.ExecuteAsync(questionId, request, cancellationToken);
+            return Ok(new { Message = "Открытый вопрос успешно обновлён!" });
         }
 
         [HttpGet("{questionId}")]
@@ -52,14 +82,6 @@ namespace WebAPI.Controllers
         {
             var question = await _getQuestionUseCase.ExecuteAsync(questionId, cancellationToken);
             return Ok(question);
-        }
-
-        [HttpPut("{questionId}")]
-        [Authorize(Policy = "AuthorOnly")]
-        public async Task<IActionResult> UpdateQuestion(int questionId, [FromBody] CreateQuestionDTO request, CancellationToken cancellationToken)
-        {
-            await _updateQuestionUseCase.ExecuteAsync(questionId, request, cancellationToken);
-            return Ok("Вопрос успешно обновлён!");
         }
 
         [HttpDelete("{questionId}")]

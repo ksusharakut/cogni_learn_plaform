@@ -81,6 +81,11 @@ using Application.Use_Cases.AnswerOption.GetAnswerOption;
 using Application.Use_Cases.AnswerOption.GetAnswerOptionsForQuestion;
 using Application.Use_Cases.AnswerOption.UpdateAnswerOption;
 using Application.Use_Cases.AnswerOption.Validators;
+using Application.Use_Cases.UserProgress.SubmitAnswer;
+using Application.Use_Cases.UserProgress.CompleteLesson;
+using Application.Use_Cases.UserProgress.GetCourseProgress;
+using Application.Use_Cases.UserProgress;
+using Application.Use_Cases.UserProgress.ResetLessonProgress;
 
 namespace WebAPI
 {
@@ -136,6 +141,7 @@ namespace WebAPI
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<ILessonRepository, LessonRepository>();
             services.AddScoped<IAnswerOptionRepository, AnswerOptionRepository>();
+            services.AddScoped<IUserProgressRepository, UserProgressRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
@@ -197,9 +203,7 @@ namespace WebAPI
             services.AddScoped<IReorderLessonsUseCase, ReorderLessonsUseCase>();
             services.AddScoped<IGetLessonsForChapterUseCase, GetLessonsForChapterUseCase>();
             services.AddScoped<IGetCourseWithDetailsUseCase, GetCourseWithDetailsUseCase>();
-            services.AddScoped<ICreateQuestionUseCase, CreateQuestionUseCase>();
             services.AddScoped<IGetQuestionUseCase, GetQuestionUseCase>();
-            services.AddScoped<IUpdateQuestionUseCase, UpdateQuestionUseCase>();
             services.AddScoped<IDeleteQuestionUseCase, DeleteQuestionUseCase>();
             services.AddScoped<IReorderQuestionsUseCase, ReorderQuestionsUseCase>();
             services.AddScoped<IGetQuestionsForLessonUseCase, GetQuestionsForLessonUseCase>();
@@ -208,6 +212,15 @@ namespace WebAPI
             services.AddScoped<IUpdateAnswerOptionUseCase, UpdateAnswerOptionUseCase>();
             services.AddScoped<IDeleteAnswerOptionUseCase, DeleteAnswerOptionUseCase>();
             services.AddScoped<IGetAnswerOptionsForQuestionUseCase, GetAnswerOptionsForQuestionUseCase>();
+            services.AddScoped<IUpdateMultipleChoiceQuestionUseCase, UpdateMultipleChoiceQuestionUseCase>();
+            services.AddScoped<IUpdateOpenEndedQuestionUseCase, UpdateOpenEndedQuestionUseCase>();
+            services.AddScoped<ICreateOpenEndedQuestionUseCase, CreateOpenEndedQuestionUseCase>();
+            services.AddScoped<ICreateMultipleChoiceQuestionUseCase, CreateMultipleChoiceQuestionUseCase>();
+            services.AddScoped<ISubmitMultipleChoiceAnswerUseCase, SubmitMultipleChoiceAnswerUseCase>();
+            services.AddScoped<ISubmitOpenEndedAnswerUseCase, SubmitOpenEndedAnswerUseCase>();
+            services.AddScoped<ICompleteLessonUseCase, CompleteLessonUseCase>();
+            services.AddScoped<IGetCourseProgressUseCase, GetCourseProgressUseCase>();
+            services.AddScoped<IResetLessonProgressUseCase, ResetLessonProgressUseCase>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)

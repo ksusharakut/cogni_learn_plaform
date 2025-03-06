@@ -23,6 +23,10 @@ namespace Infrastructure.Persistance.Data.EntityTypeConfiguration
             builder.Property(q => q.OrderIndex)
                 .IsRequired();
 
+            builder.Property(q => q.CorrectAnswer)
+                    .HasMaxLength(255) 
+                    .IsRequired(false);
+
             builder.HasOne(q => q.Lesson)  
                 .WithMany(l => l.Questions)
                 .HasForeignKey(q => q.LessonId)

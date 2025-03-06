@@ -9,6 +9,7 @@ namespace Domain.Entities
         public string Text { get; set; }
         public QuestionType QuestionType { get; set; }
         public int OrderIndex { get; set; }
+        public string CorrectAnswer { get; set; }
 
         public Lesson Lesson { get; set; }
         public ICollection<AnswerOption> AnswerOptions { get; set; }

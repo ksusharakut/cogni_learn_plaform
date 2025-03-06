@@ -19,6 +19,7 @@ namespace Infrastructure.Persistance
         public ILessonRepository LessonRepository { get; set; }
         public IQuestionRepository QuestionRepository { get; set; }
         public IAnswerOptionRepository AnswerOptionRepository { get; set; }
+        public IUserProgressRepository UserProgressRepository { get; set; }
         public UnitOfWork(ApplicationDbContext context,
             IRoleRepository roleRepository,
             IUserRepository userRepository,
@@ -30,7 +31,8 @@ namespace Infrastructure.Persistance
             IRatingRepository ratingRepository,
             ILessonRepository lessonRepository,
             IQuestionRepository questionRepository,
-            IAnswerOptionRepository answerOptionRepository)
+            IAnswerOptionRepository answerOptionRepository,
+            IUserProgressRepository userProgressRepository)
         {
             _context = context;
             RoleRepository = roleRepository;
@@ -44,6 +46,7 @@ namespace Infrastructure.Persistance
             LessonRepository = lessonRepository;
             QuestionRepository = questionRepository;
             AnswerOptionRepository = answerOptionRepository;
+            UserProgressRepository = userProgressRepository;
         }
 
         public async Task SaveChangesAsync(CancellationToken cancellationToken)

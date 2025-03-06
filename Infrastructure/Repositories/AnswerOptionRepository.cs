@@ -45,5 +45,10 @@ namespace Infrastructure.Repositories
                 .Where(a => a.QuestionId == questionId)
                 .ToListAsync(cancellationToken);
         }
+
+        public async Task<AnswerOption> GetByIdAsync(int id, CancellationToken cancellationToken)
+        {
+            return await _context.AnswerOptions.FirstOrDefaultAsync(a => a.AnswerOptionId == id, cancellationToken);
+        }
     }
 }

@@ -71,6 +71,7 @@ namespace Infrastructure.Repositories
                 .Include(c => c.Categories)
                 .Include(c => c.Chapters)
                     .ThenInclude(ch => ch.Lessons)
+                        .ThenInclude(l => l.Questions) 
                 .FirstOrDefaultAsync(c => c.CourseId == courseId, cancellationToken);
         }
 
