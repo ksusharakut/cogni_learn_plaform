@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Use Cases\Course\CompleteCourse\" />
-    <Folder Include="Use Cases\Course\GetUserProgress\" />
+    <Folder Include="UseCases\Course\CompleteCourse\" />
+    <Folder Include="UseCases\Course\GetUserProgress\" />
   </ItemGroup>
 
   <ItemGroup>
