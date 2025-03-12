@@ -1,27 +1,31 @@
-README - Cotniteq Learn Online Learning Platform
-Welcome to Cotniteq Learn — an online learning platform created as part of a diploma project. It allows users to take courses, answer questions, and track their progress. This guide will walk you through downloading the project, setting it up on your computer, running it, and testing it — all explained simply, even if you’re not a programmer!
+# Cotniteq Learn Online Learning Platform
 
-About the Project
-Cotniteq Learn is a web application built using the C# programming language, the ASP.NET Core framework, and a PostgreSQL database. Its main features include user registration, login, course completion, answering questions, and viewing progress.
+Welcome to **Cotniteq Learn** — an online learning platform created as part of a diploma project. It allows users to take courses, answer questions, and track their progress. This guide will walk you through downloading the project, setting it up on your computer, running it, and testing it — all explained simply, even if you're not a programmer!
 
-Requirements
-To set up and run the project, you’ll need the following tools. Don’t worry — I’ll explain how to get them!
+## About the Project
 
-Operating System: Windows 10 or later (these instructions are for Windows).
-.NET SDK 8.0: Tools to develop and run the application.
-PostgreSQL: A database to store information.
-Git: A tool to download the project.
-Web Browser: Like Google Chrome or Microsoft Edge.
-Postman (optional): For testing the API.
+**Cotniteq Learn** is a web application built using the C# programming language, the ASP.NET Core framework, and a PostgreSQL database. Its main features include user registration, login, course completion, answering questions, and viewing progress.
 
-Installing Required Software
+## Requirements
 
-1. Installing .NET SDK 8.0
-   Open your browser and go to https://dotnet.microsoft.com/download/dotnet/8.0.
-   Find the ".NET SDK 8.0.x" section, select the Windows version, and click "Download .NET SDK x64".
-   A file like dotnet-sdk-8.0.100-win-x64.exe will download. Open it.
-   In the installer, click "Next", accept the agreement, click "Install", then "Finish".
-   Check it worked: Open the Command Prompt (press Win + R, type cmd, press Enter), type dotnet --version. If you see 8.0.100 or similar, it’s installed!
+To set up and run the project, you'll need the following tools. Don’t worry — I'll explain how to get them!
+
+- **Operating System**: Windows 10 or later (these instructions are for Windows).
+- **.NET SDK 8.0**: Tools to develop and run the application.
+- **PostgreSQL**: A database to store information.
+- **Git**: A tool to download the project.
+- **Web Browser**: Google Chrome or Microsoft Edge.
+- **Postman (optional)**: For testing the API.
+
+## Installing Required Software
+
+### 1. Installing .NET SDK 8.0
+
+1. Open your browser and go to [Download .NET SDK 8.0](https://dotnet.microsoft.com/download/dotnet/8.0).
+2. Find the ".NET SDK 8.0.x" section, select the Windows version, and click "Download .NET SDK x64".
+3. Open the downloaded file and follow the installation steps:
+   - Click "Next", accept the agreement, click "Install", then "Finish".
+4. Check it worked: Open **Command Prompt** (press Win + R, type `cmd`, press Enter) and type `dotnet --version`. If you see `8.0.100` or similar, it’s installed!
 
 2. Installing PostgreSQL
    Go to https://www.postgresql.org/download/windows/, click "Download the installer".
